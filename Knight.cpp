@@ -9,20 +9,17 @@ Knight::Knight ( int tableRow, int tableColumn, Color color, int textureRow, int
     Pieces(tableRow, tableColumn, color, textureRow, textureColumn, repeat, moves) { type = Pieces::KNIGHT; }
 
 bool Knight::valid ( std::pair < int, int > mPair, Pieces* const ChessPiece[8][8]) const {
-    if( mPair.first > 8 || mPair.first < 1 )
+    if( mPair.first >= 8 || mPair.first < 0 )
         return false;
-    if( mPair.second > 8 || mPair.second < 1 )
+    if( mPair.second >= 8 || mPair.second < 0 )
         return false;
     if( ChessPiece[mPair.first][mPair.second] == NULL )
         return true;
     else
-        if( ChessPiece[mPair.first][mPair.second] == NULL)
-         return true;
+        if( ChessPiece[mPair.first][mPair.second] -> getColor() == getColor() )
+            return false;
         else
-            if( ChessPiece[mPair.first][mPair.second] -> getColor() == getColor() )
-                return false;
-            else
-                return true;
+            return true;
 }
 
 std::vector < std::pair < int, int > > Knight::getPossibleMoves(Pieces* const ChessPiece[8][8]) const {
