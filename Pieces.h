@@ -117,6 +117,9 @@ class Pieces{
             return m_pozition.second;
         }
         //void setRow(int row);
+        inline Piece_type getType() const {
+            return type;
+        }
 
         virtual bool valid ( std::pair < int, int >, Pieces* const [][8] ) const = 0;
         virtual std::vector < std::pair < int, int > > getPossibleMoves(Pieces* const [][8] ) const = 0;
