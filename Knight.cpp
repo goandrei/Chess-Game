@@ -2,9 +2,11 @@
 
 Knight::Knight () {}
 
-Knight::Knight (int dx, int dy) : pozition(std::make_pair(dx, dy)){}
+Knight::Knight ( std::pair < int, int > table, Color color, std::pair < int, int > texture, int repeat, int moves ) :
+    Pieces( table, color, texture, repeat, moves ){}
 
-Knight::Knight (std::pair < int, int > param) : pozition (param){}
+Knight::Knight ( int tableRow, int tableColumn, Color color, int textureRow, int textureColumn, int repeat, int moves ) :
+    Pieces(tableRow, tableColumn, color, textureRow, textureColumn, repeat, moves){}
 
 bool Knight::valid ( std::pair < int, int > mPair, Pieces* const ChessPiece[8][8]) const {
     if( mPair.first > 8 || mPair.first < 1 )
@@ -14,37 +16,40 @@ bool Knight::valid ( std::pair < int, int > mPair, Pieces* const ChessPiece[8][8
     if( ChessPiece[mPair.first][mPair.second] == NULL )
         return true;
     else
-        if( ChessPiece[mPair.first][mPair.second] -> getColor() == getColor() )
-            return false;
+        if( ChessPiece[mPair.first][mPair.second] == NULL)
+         return true;
         else
-            return true;
+            if( ChessPiece[mPair.first][mPair.second] -> getColor() == getColor() )
+                return false;
+            else
+                return true;
 }
 
 std::vector < std::pair < int, int > > Knight::getPossibleMoves(Pieces* const ChessPiece[8][8]) const {
     std::vector < std::pair < int, int > > mList;
     std::pair < int, int > aux;
-    aux = std::make_pair ( pozition.first - 2, pozition.second - 1 );
+    aux = std::make_pair ( m_pozition.first - 2, m_pozition.second - 1 );
     if( valid ( aux, ChessPiece ) )
        mList.push_back( aux );
-    aux = std::make_pair ( pozition.first - 2, pozition.second + 1 );
+    aux = std::make_pair ( m_pozition.first - 2, m_pozition.second + 1 );
     if( valid ( aux, ChessPiece ) )
        mList.push_back( aux );
-    aux = std::make_pair ( pozition.first - 1, pozition.second - 2 );
+    aux = std::make_pair ( m_pozition.first - 1, m_pozition.second - 2 );
     if( valid ( aux, ChessPiece ) )
        mList.push_back( aux );
-    aux = std::make_pair ( pozition.first - 1, pozition.second + 2 );
+    aux = std::make_pair ( m_pozition.first - 1, m_pozition.second + 2 );
     if( valid ( aux, ChessPiece ) )
        mList.push_back( aux );
-    aux = std::make_pair ( pozition.first + 2, pozition.second - 1 );
+    aux = std::make_pair ( m_pozition.first + 2, m_pozition.second - 1 );
     if( valid ( aux, ChessPiece ) )
        mList.push_back( aux );
-    aux = std::make_pair ( pozition.first + 2, pozition.second + 1 );
+    aux = std::make_pair ( m_pozition.first + 2, m_pozition.second + 1 );
     if( valid ( aux, ChessPiece ) )
        mList.push_back( aux );
-    aux = std::make_pair ( pozition.first + 1, pozition.second - 2 );
+    aux = std::make_pair ( m_pozition.first + 1, m_pozition.second - 2 );
     if( valid ( aux, ChessPiece ) )
        mList.push_back( aux );
-    aux = std::make_pair ( pozition.first + 1, pozition.second + 2 );
+    aux = std::make_pair ( m_pozition.first + 1, m_pozition.second + 2 );
     if( valid ( aux, ChessPiece ) )
        mList.push_back( aux );
     return mList;
