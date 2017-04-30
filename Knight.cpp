@@ -3,10 +3,10 @@
 Knight::Knight () {}
 
 Knight::Knight ( std::pair < int, int > table, Color color, std::pair < int, int > texture, int repeat, int moves ) :
-    Pieces( table, color, texture, repeat, moves ){}
+    Pieces( table, color, texture, repeat, moves ) { type = Pieces::KNIGHT; }
 
 Knight::Knight ( int tableRow, int tableColumn, Color color, int textureRow, int textureColumn, int repeat, int moves ) :
-    Pieces(tableRow, tableColumn, color, textureRow, textureColumn, repeat, moves){}
+    Pieces(tableRow, tableColumn, color, textureRow, textureColumn, repeat, moves) { type = Pieces::KNIGHT; }
 
 bool Knight::valid ( std::pair < int, int > mPair, Pieces* const ChessPiece[8][8]) const {
     if( mPair.first > 8 || mPair.first < 1 )

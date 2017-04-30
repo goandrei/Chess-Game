@@ -12,10 +12,19 @@ class Pieces{
             WHITE,
             BLACK
         };
+        enum Piece_type{
+            PAWN,
+            ROOK,
+            KNIGHT,
+            BISHOP,
+            QUEEN,
+            KING
+        };
 
     protected:
-        std::pair < int, int > m_pozition;
+        std::pair < int, int > m_pozition; //intre 0 si 7
         Color m_color;
+        Piece_type type;
         bool m_alive;
         bool m_selected;
         bool m_moved;
