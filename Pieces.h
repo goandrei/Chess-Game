@@ -109,6 +109,10 @@ class Pieces{
             m_moved = x;
         }
 
+        inline bool getMoved() const {
+            return m_moved;
+        }
+
         inline int getColumn() const {
             return m_pozition.first;
         }
@@ -117,6 +121,10 @@ class Pieces{
             return m_pozition.second;
         }
         //void setRow(int row);
+        inline std::pair <int, int> getPozition() const {
+            return m_pozition;
+        }
+
         inline Piece_type getType() const {
             return type;
         }
