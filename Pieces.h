@@ -7,8 +7,6 @@
 
 class Pieces{
 
-    friend class PiecesManager;
-
     public:
         enum Color{
             WHITE,
@@ -35,45 +33,31 @@ class Pieces{
         int m_repeat;
         int m_moves;
         int sign(Color);
-//        int m_pieceHeight;
-//        int m_pieceWidth;
-//
-//        SDL_Point* m_directions;
-//        SDL_Point m_tableCorner; // coordonatele de pe tabla unde va fi afiasata piesa(coltul patratelului)
-//        SDL_Point m_textureCorner; //coordonatele din poza cu piese de unde va fi afisata piesa(tot colt)
-//
-//        SDL_Texture* m_texture; //textura
+        SDL_Point m_tableCorner; // coordonatele de pe tabla unde va fi afiasata piesa(coltul patratelului)
+        SDL_Point m_textureCorner; //coordonatele din poza cu piese de unde va fi afisata piesa(tot colt)
 
     public:
         Pieces();
-        Pieces(std::pair < int, int >, Color, std::pair < int, int >, int, int);
-        Pieces(int, int, Color, int, int, int, int);
+        Pieces(std::pair < int, int >, Color, std::pair < int, int >);
+        Pieces(int, int, Color, int, int);
         virtual ~Pieces();
         //SDL_Point getEvent(SDL_Event*);
 
-//        inline int getPieceWidth(){
-//            return m_pieceWidth;
-//        }
-//
-//        inline int getPieceHeight(){
-//            return m_pieceHeight;
-//        }
-//
-//        inline int getTableCornerX(){
-//            return m_tableCorner.x;
-//        }
-//
-//        inline int getTableCornerY(){
-//            return m_tableCorner.y;
-//        }
-//
-//        inline int getTextureCornerX(){
-//            return m_textureCorner.x;
-//        }
-//
-//        inline int getTextureCornerY(){
-//            return m_textureCorner.y;
-//        }
+        inline int getTableCornerX(){
+            return m_tableCorner.x;
+        }
+
+        inline int getTableCornerY(){
+            return m_tableCorner.y;
+        }
+
+        inline int getTextureCornerX(){
+            return m_textureCorner.x;
+        }
+
+        inline int getTextureCornerY(){
+            return m_textureCorner.y;
+        }
 
         inline void setSelected(bool x){
             m_selected = x;
@@ -91,17 +75,17 @@ class Pieces{
             return m_alive;
         }
 
-//        inline void setAlpha(int a){
-//            SDL_SetTextureAlphaMod(m_texture,a);
-//        }
-//
-//        inline void setTableCornerX(int x){
-//            m_tableCorner.x = x;
-//        }
-//
-//        inline void setTableCornerY(int y){
-//            m_tableCorner.y = y;
-//        }
+    /*    inline void setAlpha(int a){
+            SDL_SetTextureAlphaMod(m_texture,a);
+        }*/
+
+        inline void setTableCornerX(int x){
+            m_tableCorner.x = x;
+        }
+
+        inline void setTableCornerY(int y){
+            m_tableCorner.y = y;
+        }
 
         inline Color getColor() const {
             return m_color;
@@ -127,12 +111,17 @@ class Pieces{
             return m_pozition;
         }
 
+        inline void setPozition( std::pair < int, int > pos){
+            m_pozition = pos;
+        }
+
         inline Piece_type getType() const {
             return type;
         }
 
         virtual bool valid ( std::pair < int, int >, Pieces* const [][8] ) const = 0;
         virtual std::vector < std::pair < int, int > > getPossibleMoves(Pieces* const [][8] ) const = 0;
+        std::pair < int, int > Get_King_Pozition( Pieces::Color, Pieces* const [][8] ) const;
 };
 
 
